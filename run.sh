@@ -78,6 +78,7 @@ if [ ! -z "${SMTP_NETWORKS}" ]; then
                         echo "$i is not in proper IPv4 subnet format. Ignoring."
                 fi
         done
+        nets=${nets:2}
 else
     nets='10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
 fi
