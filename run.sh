@@ -69,7 +69,7 @@ if [ ! -z "${SMTP_HEADER_TAG}" ]; then
 fi
 
 #Check for subnet restrictions
-nets='10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
+nets=''
 if [ ! -z "${SMTP_NETWORKS}" ]; then
         for i in $(sed 's/,/\ /g' <<<$SMTP_NETWORKS); do
                 if grep -Eq "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}" <<<$i ; then
@@ -78,6 +78,8 @@ if [ ! -z "${SMTP_NETWORKS}" ]; then
                         echo "$i is not in proper IPv4 subnet format. Ignoring."
                 fi
         done
+else
+    nets='10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
 fi
 add_config_value "mynetworks" "${nets}"
 
