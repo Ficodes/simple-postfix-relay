@@ -43,10 +43,12 @@ add_config_value "always_add_missing_headers" "${ALWAYS_ADD_MISSING_HEADERS:-no}
 #Also use "native" option to allow looking up hosts added to /etc/hosts via
 # docker options (issue #51)
 add_config_value "smtp_host_lookup" "native,dns"
+# Allow to cofigure smtp_tls_security_level and require an encrypted connection by default
+# This options has nothing to do with SMTP_PORT
+add_config_value "smtp_tls_security_level" "${SMTP_TLS_SECURITY_LEVEL:-encrypt}"
 
 if [ "${SMTP_PORT}" = "465" ]; then
   add_config_value "smtp_tls_wrappermode" "yes"
-  add_config_value "smtp_tls_security_level" "encrypt"
 fi
 
 # Create sasl_passwd file with auth credentials
